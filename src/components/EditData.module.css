@@ -1,0 +1,59 @@
+.AddNewData {
+  width: 100%;
+  background: var(--primary);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AddDataForm {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.AddDataForm div {
+  width: inherit;
+}
+
+.AddDataForm label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.AddDataForm textarea {
+  resize: none;
+  min-height: 100px;
+  border-radius: 5px;
+  border: 2px solid var(--color);
+  outline: none;
+  background: transparent;
+  width: inherit;
+  padding: 10px 2px;
+  color: var(--color);
+}
+
+.AddDataForm input {
+  all: unset;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  width: 100%;
+  border: 2px solid var(--color);
+  padding: 10px 2px;
+}
+
+.AddDataForm .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 767px) {
+  .AddDataForm {
+    width: 100%;
+  }
+  
+}

@@ -1,0 +1,82 @@
+/* Base Styles */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav a:link,
+.nav a:active,
+.nav a:visited {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.5rem 1.7rem;
+  border-radius: 7px;
+  color: var(--color);
+}
+
+/* Active Link Styling */
+.nav a:global(.active) {
+  border: 2px solid var(--color);
+}
+
+a.ctaLink:link,
+a.ctaLink:active,
+a.ctaLink:visited {
+  border: 2px solid var(--color);
+  padding: 0.5rem 1.7rem;
+  border-radius: 7px;
+}
+
+.burger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .burger-menu {
+    display: block;
+  }
+
+  .nav {
+    position: relative;
+  }
+
+  .navClosed {
+    overflow: hidden;
+  }
+
+  .nav ul {
+    opacity: 0;
+    transform: translateX(100%);
+    flex-direction: column;
+    background: var(--primary);
+    width: 100%;
+    gap: 1.5rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 2rem 1rem;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+    z-index: 9;
+  }
+
+  .nav ul.navLinksOpen {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+}

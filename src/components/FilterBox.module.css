@@ -1,0 +1,20 @@
+.filterBox {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  border: 2px solid var(--color);
+  border-radius: 5px;
+}
+
+.filterBox select {
+  all: unset;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background: transparent;
+  color: var(--color);
+}
+
+.filterBox option {
+  background: var(--color);
+  color: var(--primary);
+}
