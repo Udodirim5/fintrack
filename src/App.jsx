@@ -15,7 +15,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/fintrack">
     <ErrorBoundary>
       <AuthProvider>
         <ExpensesProvider>
