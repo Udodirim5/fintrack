@@ -14,61 +14,64 @@ import EditExpensesSuperComponent from "./components/EditExpensesSuperComponent"
 import ErrorBoundary from "./components/ErrorBoundary";
 
 const App = () => {
+  const isProduction = import.meta.env.PROD;
+  const basename = isProduction ? "/fintrack" : "/";
+
   return (
-    <BrowserRouter basename="/fintrack">
-    <ErrorBoundary>
-      <AuthProvider>
-        <ExpensesProvider>
-          <IncomeProvider>
-            <div className="app">
-              <PageNav />
-              <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="login" element={<LoginPage />} />
+    <BrowserRouter basename={basename}>
+      <ErrorBoundary>
+        <AuthProvider>
+          <ExpensesProvider>
+            <IncomeProvider>
+              <div className="app">
+                <PageNav />
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+                  <Route path="login" element={<LoginPage />} />
 
-                {/* Expenses Routes */}
-                <Route
-                  path="expenses"
-                  element={
-                    <ProtectedRoute>
-                      <ExpensesPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="expenses/edit/:id"
-                  element={
-                    <ProtectedRoute>
-                      <EditExpensesSuperComponent />
-                    </ProtectedRoute>
-                  }
-                />
+                  {/* Expenses Routes */}
+                  <Route
+                    path="expenses"
+                    element={
+                      <ProtectedRoute>
+                        <ExpensesPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="expenses/edit/:id"
+                    element={
+                      <ProtectedRoute>
+                        <EditExpensesSuperComponent />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                {/* Income Routes */}
-                <Route
-                  path="incomes"
-                  element={
-                    <ProtectedRoute>
-                      <IncomePage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="incomes/edit/:id"
-                  element={
-                    <ProtectedRoute>
-                      <EditIncomeSuperComponent />
-                    </ProtectedRoute>
-                  }
-                />
+                  {/* Income Routes */}
+                  <Route
+                    path="incomes"
+                    element={
+                      <ProtectedRoute>
+                        <IncomePage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="incomes/edit/:id"
+                    element={
+                      <ProtectedRoute>
+                        <EditIncomeSuperComponent />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                <Route path="*" element={<ErrorPage />} />
-              </Routes>
-            </div>
-          </IncomeProvider>
-        </ExpensesProvider>
-      </AuthProvider>
-    </ErrorBoundary>
+                  <Route path="*" element={<ErrorPage />} />
+                </Routes>
+              </div>
+            </IncomeProvider>
+          </ExpensesProvider>
+        </AuthProvider>
+      </ErrorBoundary>
     </BrowserRouter>
   );
 };
