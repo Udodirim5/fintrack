@@ -65,6 +65,7 @@ const IncomeProvider = ({ children }) => {
       if (!response.ok) throw new Error("Failed to add data");
       setData((prevData) => [dataWithId, ...prevData]);
       setNewData(initialData);
+      setShowAdd(false);
     } catch (err) {
       setError("An error occurred while adding data");
       console.log(err);

@@ -1,9 +1,28 @@
+.header {
+  background-color: var(--primary);
+  color: var(--color);
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
 /* Base Styles */
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding: 1rem;
+}
+
+.nav a {
+  /* border: 2px solid red; */
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }
 
 .nav ul {

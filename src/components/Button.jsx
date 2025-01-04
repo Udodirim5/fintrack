@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const Button = ({ children, color, border, onClick }) => {
+const Button = ({ children, color, border, onClick, id="" }) => {
   const ButtonStyle = {
     backgroundColor: color? color : "transparent",
     color: "white",
@@ -11,7 +11,7 @@ const Button = ({ children, color, border, onClick }) => {
     border: border? border : `2px solid ${color}`,
   };
   return (
-    <button style={ButtonStyle} onClick={onClick}>
+    <button style={ButtonStyle} id={id} onClick={onClick}>
       {children}
     </button>
   );

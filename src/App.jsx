@@ -7,11 +7,12 @@ import ErrorPage from "./pages/ErrorPage";
 import LoginPage from "./pages/LoginPage";
 import PageNav from "./components/PageNav";
 import IncomePage from "./pages/IncomePage";
+import SignupPage from "./pages/SignupPage";
 import ExpensesPage from "./pages/ExpensesPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import ErrorBoundary from "./components/ErrorBoundary";
 import EditIncomeSuperComponent from "./components/EditIncomeSuperComponent";
 import EditExpensesSuperComponent from "./components/EditExpensesSuperComponent";
-import ErrorBoundary from "./components/ErrorBoundary";
 
 const App = () => {
   const isProduction = import.meta.env.PROD;
@@ -28,6 +29,7 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Homepage />} />
                   <Route path="login" element={<LoginPage />} />
+                  <Route path="signup" element={<SignupPage />} />
 
                   {/* Expenses Routes */}
                   <Route

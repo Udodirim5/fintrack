@@ -42,7 +42,7 @@ body {
 }
 
 main {
-  margin-top: 1.5rem;
+  margin-top: 4.5rem;
   padding: 1rem;
   position: relative;
 }
@@ -53,9 +53,11 @@ main {
   text-align: center;
   align-items: center;
   margin-bottom: 1rem;
+  position: relative;
 }
 
 .total-amount {
+  border: 2px solid var(--color);
   background-color: var(--color);
   padding: 0.5rem 1rem;
   color: var(--primary);
@@ -84,6 +86,7 @@ table td {
 
 table th {
   background-color: var(--primary-1);
+  width: max-content;
 }
 
 table tbody {
@@ -107,11 +110,23 @@ table td {
 }
 
 table td button {
-  background-color: var(--primary-2);
-  border: none;
+  all: unset;
+}
+
+table td .icon {
+  margin: 0;
+  padding: 0;
+  object-fit: cover;
+  height: 30px;
+}
+
+table td button#deleteBtn {
+  background-color: red;
   color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
   cursor: pointer;
-  padding: 0.5rem;
 }
 
 .table-body-wrapper {
@@ -138,6 +153,13 @@ table td button {
   margin-bottom: .8rem;
 }
 
+@media (min-width: 769px) {
+  .total-amount {
+    position: relative;
+    top: 12px;
+    right: 0;
+  }
+}
 
 @media screen and (max-width: 768px) {
   .app {

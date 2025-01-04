@@ -6,7 +6,7 @@ const EditExpensesSuperComponent = () => {
     useExpenses();
 
   return (
-    <>
+    <main>
       <EditData
         type="expense"
         initialData={initialData}
@@ -14,7 +14,7 @@ const EditExpensesSuperComponent = () => {
         updateData={updateExpense}
         getSingleData={getSingleExpense}
       />
-    </>
+    </main>
   );
 };
 

@@ -9,9 +9,9 @@
   gap: 20px;
   background: linear-gradient(to bottom, var(--primary), #ffffff);
   border-radius: 1.25rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px #0000001a;
   align-items: center;
-  padding: 20px;
+  padding: 4rem 1.25rem;
 }
 
 .heroImg {
@@ -33,7 +33,6 @@
 .hero h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
-  color: #333;
 }
 
 .hero p {
@@ -55,8 +54,9 @@
   border-radius: 1.25rem;
   text-decoration: none;
   font-weight: bold;
-  color: var(--primary);
   transition: all 0.3s ease;
+  border: 2px solid var(--color);
+  color: #fff;
 }
 
 .primaryBtn {
@@ -64,16 +64,22 @@
 }
 
 .primaryBtn:hover {
-  background-color: #007bff;
-  color: #fff;
+  background-color: transparent;
+  color: var(--color);
 }
 
 .secondaryBtn {
-  background-color: #28a745;
+  color: var(--color);
 }
 
 .secondaryBtn:hover {
-  background-color: #1e7e34;
+  background-color: var(--color);
+  color: #fff;
+}
+
+.features {
+  margin-top: 5rem;
+  padding: 1.25rem 0 5.5rem;
 }
 
 .featuresGrid {
@@ -85,7 +91,7 @@
   text-align: center;
   background-color: #f8f9fa;
   border-radius: 1.25rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px #0000001a;
 }
 
 .features img {
@@ -96,7 +102,6 @@
 .features h2 {
   font-size: 2rem;
   margin-bottom: 1.25rem;
-  color: #333;
 }
 
 .features h3 {

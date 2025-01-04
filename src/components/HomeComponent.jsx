@@ -12,7 +12,7 @@ const HomeComponent = () => {
           </p>
 
         <div className={styles.buttons}>
-          <Link to="#" className={styles.primaryBtn}>
+          <Link to="/signup" className={styles.primaryBtn}>
             Get Started
           </Link>
           <Link to="/login" className={styles.secondaryBtn}>
@@ -21,7 +21,7 @@ const HomeComponent = () => {
         </div>
         </div>
         <div className={styles.heroImg}>
-          <img src="/hero-graph.svg" alt="Finance Icons" />
+          <img src="/hero-img.png" alt="Finance Icons" />
         </div>
       </section>
 
@@ -48,7 +48,7 @@ const HomeComponent = () => {
 
       <section className={styles.section + " " + styles.cta}>
         <h2>Ready to take control of your finances?</h2>
-        <Link to="#">Sign Up Now</Link>
+        <Link to="signup">Sign Up Now</Link>
       </section>
 
       <footer>

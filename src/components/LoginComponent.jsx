@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./LoginComponent.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 const LoginComponent = () => {
@@ -66,7 +66,7 @@ const LoginComponent = () => {
 
         <p className={styles.toggle}>
           Don&apos;t have an account?
-          <a href="#">Sign Up</a>
+          <Link to="/signup">Sign Up</Link>
         </p>
       </div>
     </div>

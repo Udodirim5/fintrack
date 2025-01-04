@@ -5,13 +5,15 @@ const EditIncomeSuperComponent = () => {
   const { updateData, initialData, getSingleData, setShowEdit } = useIncome();
 
   return (
-    <EditData
-      type="income"
-      initialData={initialData}
-      getSingleData={getSingleData}
-      updateData={updateData}
-      setShowEdit={setShowEdit}
-    />
+    <main>
+      <EditData
+        type="income"
+        initialData={initialData}
+        getSingleData={getSingleData}
+        updateData={updateData}
+        setShowEdit={setShowEdit}
+      />
+    </main>
   );
 };
 

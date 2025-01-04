@@ -6,8 +6,14 @@ import SearchData from "../components/SearchData";
 import FilterBox from "../components/FilterBox";
 import Pagination from "../components/Pagination";
 import Loader from "../components/Loader";
+import ConfirmationModal from "../components/ConfirmationModal";
+import { useState } from "react";
+
 
 const IncomePage = () => {
+  const [confirmModal, setConfirmModal] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get("page")) || 1;
 
@@ -19,9 +25,9 @@ const IncomePage = () => {
     newData,
     showEdit,
     setFilter,
+    deleteData,
     setShowAdd,
     createData,
-    deleteData,
     searchData,
     setShowEdit,
     handleChange,
@@ -124,6 +130,11 @@ const IncomePage = () => {
     setShowAdd(!showAdd);
   };
 
+  const toggleConfirmModal = (income = null) => {
+    setSelectedData(income);
+    setConfirmModal(!confirmModal);
+  };
+
   const toggleEdit = () => {
     setShowEdit(true);
   };
@@ -137,6 +148,15 @@ const IncomePage = () => {
 
   return (
     <main>
+      {confirmModal && (
+        <ConfirmationModal
+          data={selectedData}
+          onConfirm={(data) => deleteData(data.ID)}
+          onClose={() => setConfirmModal(false)}
+          title="Delete Income Entry"
+          message={`Are you sure you want to delete the income entry for "${selectedData?.Reason}"?`}
+        />
+      )}
       <div className="page-header">
         <Button color=" #003366" onClick={toggleAdd} aria-label="Add income">
           Add new
@@ -177,16 +197,18 @@ const IncomePage = () => {
                   <td className="description">{income.Reason}</td>
                   <td className="actions">
                     <Link to={`edit/${income.ID}`}>
-                      <Button onClick={toggleEdit} color="#5F9EA0">
-                        Edit
-                      </Button>
+                      <img
+                        onClick={toggleEdit}
+                        color="#5F9EA0"
+                        src="/edit.png"
+                        className="icon"
+                      />
                     </Link>
-                    <Button
-                      onClick={() => deleteData(income.ID)}
-                      color="#5F9EA0"
-                    >
-                      Delete
-                    </Button>
+                    <img
+                      onClick={() => toggleConfirmModal(income)}
+                      src="/delete.png"
+                      className="icon"
+                    />
                   </td>
                 </tr>
               ))
