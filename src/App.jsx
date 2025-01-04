@@ -13,6 +13,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import ErrorBoundary from "./components/ErrorBoundary";
 import EditIncomeSuperComponent from "./components/EditIncomeSuperComponent";
 import EditExpensesSuperComponent from "./components/EditExpensesSuperComponent";
+import AboutPage from "./pages/AboutPage";
 
 const App = () => {
   const isProduction = import.meta.env.PROD;
@@ -30,6 +31,8 @@ const App = () => {
                   <Route path="/" element={<Homepage />} />
                   <Route path="login" element={<LoginPage />} />
                   <Route path="signup" element={<SignupPage />} />
+                  <Route path="about" element={<AboutPage />} />
+                  {/* <Route path="contact" element={<AboutPage />} /> */}
 
                   {/* Expenses Routes */}
                   <Route

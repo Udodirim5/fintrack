@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./HomeComponent.module.css";
+import ReviewLists from "./ReviewLists";
 const HomeComponent = () => {
   return (
     <>
@@ -45,6 +46,11 @@ const HomeComponent = () => {
           </div>
         </div>
       </section>
+
+      <section className={styles.section + " " + styles.testimonials}>
+        <h2>What Our Users Say</h2>
+        <ReviewLists />
+        </section>
 
       <section className={styles.section + " " + styles.cta}>
         <h2>Ready to take control of your finances?</h2>

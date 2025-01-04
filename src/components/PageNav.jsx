@@ -18,6 +18,14 @@ const PageNav = () => {
       <nav className={`${styles.nav} ${!isMenuOpen ? styles.navClosed : ''}`}>
         <Logo />
         <ul className={isMenuOpen ? styles.navLinksOpen : ''}>
+            <>
+              <li>
+                <NavLink to="/about" onClick={toggleMenu} >About</NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact" onClick={toggleMenu} >Contact</NavLink>
+              </li>
+            </>
           {isAuthenticated ? (
             <>
               <li>

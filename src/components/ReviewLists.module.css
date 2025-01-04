@@ -1,0 +1,15 @@
+.container {
+  overflow-x: auto;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    gap: 0.5rem;
+    padding: 0.5rem 1.125rem;
+  }
+}

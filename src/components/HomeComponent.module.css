@@ -115,6 +115,14 @@
   color: #666;
 }
 
+.testimonials {
+  padding: 1.25rem 0 5.5rem;
+}
+
+.testimonials h2 {
+  font-size: 2rem;
+  margin-bottom: 1.25rem;
+}
 .cta {
   background-color: var(--color);
   color: var(--primary);
