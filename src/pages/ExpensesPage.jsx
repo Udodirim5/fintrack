@@ -1,5 +1,11 @@
+import { useState } from "react";
 import { Link, Outlet, useSearchParams } from "react-router-dom";
 import { useExpenses } from "../hooks/useExpenses";
+import {
+  formatNumberWithCommas,
+  formatDateForDisplay,
+} from "../hooks/formatData";
+
 import AddData from "../components/AddData";
 import Button from "../components/Button";
 import SearchData from "../components/SearchData";
@@ -7,7 +13,6 @@ import FilterBox from "../components/FilterBox";
 import Pagination from "../components/Pagination";
 import Loader from "../components/Loader";
 import ConfirmationModal from "../components/ConfirmationModal";
-import { useState } from "react";
 
 const ExpensesPage = () => {
   const [confirmModal, setConfirmModal] = useState(false);
@@ -17,7 +22,9 @@ const ExpensesPage = () => {
   const currentPage = parseInt(searchParams.get("page")) || 1;
 
   const {
+    sort,
     filter,
+    setSort,
     newData,
     showAdd,
     loading,
@@ -43,7 +50,7 @@ const ExpensesPage = () => {
     return new Date(year, month - 1, day); // Month is 0-indexed
   };
 
-  // Helper functions
+  // Helper functions for filtering
   const startOfMonth = (date) =>
     new Date(date.getFullYear(), date.getMonth(), 1);
   const endOfMonth = (date) =>
@@ -51,14 +58,38 @@ const ExpensesPage = () => {
   const startOfYear = (date) => new Date(date.getFullYear(), 0, 1);
   const endOfYear = (date) => new Date(date.getFullYear(), 11, 31);
 
+  // Sorting
+  let sortedData;
+  switch (sort) {
+    case "ascending":
+      sortedData = [...queriedData].sort((a, b) => {
+        const dateA = parseDate(a.Date);
+        const dateB = parseDate(b.Date);
+        return dateB - dateA; // Compare Date objects
+      });
+      break;
+
+    case "descending":
+      sortedData = [...queriedData].sort((a, b) => {
+        const dateA = parseDate(a.Date);
+        const dateB = parseDate(b.Date);
+        return dateA - dateB; // Compare Date objects
+      });
+      break;
+
+    default:
+      sortedData = [...queriedData];
+      break;
+  }
+
   let filteredItems;
   switch (filter) {
     case "all":
-      filteredItems = queriedData;
+      filteredItems = sortedData;
       break;
 
     case "thisMonth":
-      filteredItems = queriedData.filter((expense) => {
+      filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
         const today = new Date();
         const start = startOfMonth(today);
@@ -68,7 +99,7 @@ const ExpensesPage = () => {
       break;
 
     case "lastMonth":
-      filteredItems = queriedData.filter((expense) => {
+      filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
         const today = new Date();
         const start = startOfMonth(
@@ -82,7 +113,7 @@ const ExpensesPage = () => {
       break;
 
     case "thisYear":
-      filteredItems = queriedData.filter((expense) => {
+      filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
         const today = new Date();
         const start = startOfYear(today);
@@ -92,7 +123,7 @@ const ExpensesPage = () => {
       break;
 
     case "lastYear":
-      filteredItems = queriedData.filter((expense) => {
+      filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
         const today = new Date();
         const start = startOfYear(new Date(today.getFullYear() - 1, 0, 1));
@@ -102,7 +133,7 @@ const ExpensesPage = () => {
       break;
 
     default:
-      filteredItems = queriedData;
+      filteredItems = sortedData;
       break;
   }
 
@@ -137,7 +168,7 @@ const ExpensesPage = () => {
     setSelectedExpense(expense);
     setConfirmModal(true);
   };
-  
+
   const totalExpenses = expenses.reduce(
     (sum, expense) => sum + Number(expense.Amount),
     0
@@ -160,10 +191,15 @@ const ExpensesPage = () => {
         <Button color=" #003366" onClick={toggleAdd} aria-label="Add expense">
           Add new
         </Button>
-        <FilterBox filter={filter} setFilter={setFilter} />
+        <FilterBox
+          filter={filter}
+          setFilter={setFilter}
+          sort={sort}
+          setSort={setSort}
+        />
         <SearchData searchData={searchData} setSearchData={setSearchData} />
         <p className="total-amount">
-          Total expenses: <span>#{totalExpenses}</span>
+          Total expenses: <span>#{formatNumberWithCommas(totalExpenses)}</span>
         </p>
       </div>
       {showAdd && (
@@ -191,8 +227,8 @@ const ExpensesPage = () => {
             {expenses.length > 0 ? (
               currentItems.map((expense, i) => (
                 <tr key={i}>
-                  <td>{expense.Date}</td>
-                  <td>{expense.Amount}</td>
+                  <td>{formatDateForDisplay(expense.Date)}</td>
+                  <td>{formatNumberWithCommas(expense.Amount)}</td>
                   <td className="description">{expense.Reason}</td>
                   <td className="actions">
                     <Link to={`edit/${expense.ID}`}>

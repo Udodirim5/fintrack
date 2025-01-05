@@ -1,16 +1,17 @@
 import styles from "./AboutPage.module.css";
+import Footer from "../components/Footer";
 
 const AboutPage = () => {
   return (
     <main>
       <div className={styles.product}>
+        <h2>About FinTrack</h2>
         <section>
           <img
             src="about.jpg"
             alt="A person with a dog overlooking a mountain during sunset"
           />
           <div>
-            <h2>About FinTrack</h2>
             <p>
               Welcome to FinTrack, your ultimate companion for managing and
               understanding your finances. Designed with simplicity and
@@ -31,6 +32,7 @@ const AboutPage = () => {
           </div>
         </section>
       </div>
+      <Footer />
     </main>
   );
 };

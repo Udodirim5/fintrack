@@ -1,0 +1,35 @@
+.footer {
+  background: #0F1C3F;
+  padding: 1.25rem;
+  text-align: center;
+  position: relative;
+  min-height: 100px;
+  overflow: hidden;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40rem;
+  height: 40rem;
+  border-radius: 50%;
+  background: #6079FF;
+  opacity: .3;
+  filter: blur(70px);
+
+}
+
+.footer p {
+  color: #fff;
+  margin: 0;
+  z-index: 1;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}

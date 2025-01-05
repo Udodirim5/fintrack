@@ -38,7 +38,7 @@ const SignUpComponent = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <span onClick={togglePassword} className={styles.showPassword}>
-              {showPassword ? "Hide" : "Show"}
+              { password !== "" ? showPassword ? "Hide" : "Show" : ""  }
             </span>
           </div>
           <div className={styles.inputGroup}>
@@ -49,7 +49,7 @@ const SignUpComponent = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <span onClick={toggleConfirmPassword} className={styles.showPassword}>
-              {showConfirmPassword ? "Hide" : "Show"}
+              { confirmPassword !== "" ? showConfirmPassword ? "Hide" : "Show" : ""  }
             </span>
           </div>
           <div className={styles.formActions}>

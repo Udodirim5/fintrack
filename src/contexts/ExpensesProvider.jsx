@@ -15,6 +15,7 @@ const ExpensesProvider = ({ children }) => {
   const [filter, setFilter] = useState("all");
   const [expenses, setExpenses] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
+  const [sort, setSort] = useState("ascending");
   const [loading, setLoading] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [searchData, setSearchData] = useState("");
@@ -126,6 +127,7 @@ const ExpensesProvider = ({ children }) => {
   return (
     <ExpensesContext.Provider
       value={{
+        sort,
         error,
         filter,
         loading,
@@ -133,6 +135,7 @@ const ExpensesProvider = ({ children }) => {
         showAdd,
         showEdit,
         expenses,
+        setSort,
         searchData,
         initialData,
         setFilter,

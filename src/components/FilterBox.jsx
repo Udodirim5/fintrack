@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import styles from './FilterBox.module.css'
 
-const FilterBox = ({filter, setFilter}) => {
+const FilterBox = ({filter, setFilter, sort, setSort}) => {
   return (
     <div className={styles.filterBox}>
       <select value={filter} onChange={(e) => setFilter(e.target.value)}>
@@ -10,6 +10,11 @@ const FilterBox = ({filter, setFilter}) => {
         <option value="thisMonth">This Month</option>
         <option value="lastYear">Last Year</option>
         <option value="thisYear">This Year</option>
+      </select>
+
+      <select value={sort} onChange={(e) => setSort(e.target.value)}>
+        <option value="ascending">Ascending</option>
+        <option value="descending">Descending</option>
       </select>
     </div>
   )

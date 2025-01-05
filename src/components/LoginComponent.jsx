@@ -54,7 +54,7 @@ const LoginComponent = () => {
               required
             />
             <span onClick={togglePassword} className={styles.showPassword}>
-              {showPassword ? "Hide" : "Show"}
+              { password !== "" ? showPassword ? "Hide" : "Show" : ""  }
             </span>
           </div>
           <div className={styles.formActions}>

@@ -151,17 +151,6 @@
   color: var(--primary);
 }
 
-footer {
-  background: #333;
-  color: #fff;
-  padding: 1.25rem;
-  text-align: center;
-}
-
-footer p {
-  margin: 0;
-}
-
 @media (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr;

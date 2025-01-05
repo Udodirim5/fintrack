@@ -1,19 +1,19 @@
 /* eslint-disable react/prop-types */
-import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import { createContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
-const IncomeContext = createContext();
+const DataContext = createContext();
+
 const initialData = {
   Date: new Date().toISOString().split("T")[0],
   Reason: "",
   Amount: 0,
 };
 
-const IncomeProvider = ({ children }) => {
+const DataProvider = ({ children, url, contextName }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-  const [sort, setSort] = useState("ascending");
   const [filter, setFilter] = useState("all");
   const [showAdd, setShowAdd] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -23,16 +23,13 @@ const IncomeProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const URL =
-    "https://api.sheetbest.com/sheets/e9992fc2-13af-403d-8059-738f63c0c6a3";
-
   const getData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(URL);
-      if (!response.ok) throw new Error("Failed to fetch data");
-      const dataPromise = await response.json();
-      setData(dataPromise);
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`Failed to fetch ${contextName}`);
+      const dataResponse = await response.json();
+      setData(dataResponse);
     } catch (err) {
       setError(err.message);
       setData([]);
@@ -58,79 +55,73 @@ const IncomeProvider = ({ children }) => {
       const uniqueId = uuidv4();
       const dataWithId = { ...newData, ID: uniqueId };
 
-      const response = await fetch(URL, {
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataWithId),
       });
-      if (!response.ok) throw new Error("Failed to add data");
+      if (!response.ok) throw new Error(`Failed to add ${contextName}`);
       setData((prevData) => [dataWithId, ...prevData]);
       setNewData(initialData);
       setShowAdd(false);
     } catch (err) {
-      setError("An error occurred while adding data");
+      setError(`An error occurred while adding ${contextName}`);
       console.log(err);
     }
   };
 
   const deleteData = async (id) => {
     try {
-      const response = await fetch(`${URL}/ID/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) throw new Error("Failed to delete data");
-      setData((prevData) => prevData.filter((data) => data.ID !== id));
+      const response = await fetch(`${url}/ID/${id}`, { method: "DELETE" });
+      if (!response.ok) throw new Error(`Failed to delete ${contextName}`);
+      setData((prevData) => prevData.filter((dataItem) => dataItem.ID !== id));
     } catch (err) {
-      setError("An error occurred while deleting data");
+      setError(`An error occurred while deleting ${contextName}`);
       console.log(err);
     }
   };
 
   const getSingleData = async (id) => {
-    const response = await fetch(`${URL}/ID/${id}`);
-    if (!response.ok) throw new Error("Failed to fetch data");
+    const response = await fetch(`${url}/ID/${id}`);
+    if (!response.ok) throw new Error(`Failed to fetch ${contextName}`);
     return await response.json();
   };
 
   const updateData = async (id, updatedData) => {
-
     try {
-      const response = await fetch(`${URL}/ID/${id}`, {
+      const response = await fetch(`${url}/ID/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),
       });
-      if (!response.ok) throw new Error("Failed to update data");
+      if (!response.ok) throw new Error(`Failed to update ${contextName}`);
 
-      // Update local state with the new data
       setData((prevData) =>
-        prevData.map((data) =>
-          data.ID === id ? { ...data, ...updatedData } : data
+        prevData.map((dataItem) =>
+          dataItem.ID === id ? { ...dataItem, ...updatedData } : dataItem
         )
       );
 
-      // Reset form and state
       setError(null);
       setNewData(initialData);
-      navigate("/incomes");
+      navigate(`/${contextName.toLowerCase()}s`);
     } catch (err) {
-      setError("An error occurred while updating data");
+      setError(`An error occurred while updating ${contextName}`);
       console.error(err);
     }
   };
 
   useEffect(() => {
     getData();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ ]);
 
   return (
-    <IncomeContext.Provider
+    <DataContext.Provider
       value={{
         data,
-        sort,
         error,
         filter,
-        setSort,
         showAdd,
         loading,
         newData,
@@ -150,8 +141,8 @@ const IncomeProvider = ({ children }) => {
       }}
     >
       {children}
-    </IncomeContext.Provider>
+    </DataContext.Provider>
   );
 };
 
-export { IncomeContext, IncomeProvider };
+export { DataContext, DataProvider };

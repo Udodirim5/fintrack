@@ -57,9 +57,6 @@ const HomeComponent = () => {
         <Link to="signup">Sign Up Now</Link>
       </section>
 
-      <footer>
-        <p>&copy; 2025 FinTrack. All Rights Reserved.</p>
-      </footer>
     </>
   );
 };

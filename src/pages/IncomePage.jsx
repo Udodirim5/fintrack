@@ -1,5 +1,10 @@
 import { Link, Outlet, useSearchParams } from "react-router-dom";
 import { useIncome } from "../hooks/useIncome";
+import {
+  formatNumberWithCommas,
+  formatDateForDisplay,
+} from "../hooks/formatData";
+
 import AddData from "../components/AddData";
 import Button from "../components/Button";
 import SearchData from "../components/SearchData";
@@ -9,7 +14,6 @@ import Loader from "../components/Loader";
 import ConfirmationModal from "../components/ConfirmationModal";
 import { useState } from "react";
 
-
 const IncomePage = () => {
   const [confirmModal, setConfirmModal] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
@@ -18,10 +22,12 @@ const IncomePage = () => {
   const currentPage = parseInt(searchParams.get("page")) || 1;
 
   const {
+    sort,
     data,
     filter,
     showAdd,
     loading,
+    setSort,
     newData,
     showEdit,
     setFilter,
@@ -37,29 +43,51 @@ const IncomePage = () => {
   let queriedData = data.filter((incomeData) =>
     incomeData.Reason.toLowerCase().includes(searchData.toLowerCase())
   );
-
+  
   // Convert a date string (MM/dd/yyyy) to a Date object
   const parseDate = (dateString) => {
     const [month, day, year] = dateString.split("/");
     return new Date(year, month - 1, day); // Month is 0-indexed
   };
-
-  // Helper functions
-  const startOfMonth = (date) =>
-    new Date(date.getFullYear(), date.getMonth(), 1);
-  const endOfMonth = (date) =>
-    new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  
+  // Helper functions for filtering
+  const startOfMonth = (date) => new Date(date.getFullYear(), date.getMonth(), 1);
+  const endOfMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 1, 0);
   const startOfYear = (date) => new Date(date.getFullYear(), 0, 1);
   const endOfYear = (date) => new Date(date.getFullYear(), 11, 31);
-
+  
+  // Sorting
+  let sortedData;
+  switch (sort) {
+    case "ascending":
+      sortedData = [...queriedData].sort((a, b) => {
+        const dateA = parseDate(a.Date);
+        const dateB = parseDate(b.Date);
+        return dateB - dateA; // Compare Date objects
+      });
+      break;
+  
+    case "descending":
+      sortedData = [...queriedData].sort((a, b) => {
+        const dateA = parseDate(a.Date);
+        const dateB = parseDate(b.Date);
+        return dateA - dateB; // Compare Date objects
+      });
+      break;
+  
+    default:
+      sortedData = [...queriedData];
+      break;
+  }
+  
   let filteredItems;
   switch (filter) {
     case "all":
-      filteredItems = queriedData;
+      filteredItems = sortedData;
       break;
-
+  
     case "thisMonth":
-      filteredItems = queriedData.filter((expense) => {
+      filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
         const today = new Date();
         const start = startOfMonth(today);
@@ -67,23 +95,19 @@ const IncomePage = () => {
         return expenseDate >= start && expenseDate <= end;
       });
       break;
-
+  
     case "lastMonth":
-      filteredItems = queriedData.filter((expense) => {
+      filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
         const today = new Date();
-        const start = startOfMonth(
-          new Date(today.getFullYear(), today.getMonth() - 1, 1)
-        );
-        const end = endOfMonth(
-          new Date(today.getFullYear(), today.getMonth() - 1, 1)
-        );
+        const start = startOfMonth(new Date(today.getFullYear(), today.getMonth() - 1, 1));
+        const end = endOfMonth(new Date(today.getFullYear(), today.getMonth() - 1, 1));
         return expenseDate >= start && expenseDate <= end;
       });
       break;
-
+  
     case "thisYear":
-      filteredItems = queriedData.filter((expense) => {
+      filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
         const today = new Date();
         const start = startOfYear(today);
@@ -91,9 +115,9 @@ const IncomePage = () => {
         return expenseDate >= start && expenseDate <= end;
       });
       break;
-
+  
     case "lastYear":
-      filteredItems = queriedData.filter((expense) => {
+      filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
         const today = new Date();
         const start = startOfYear(new Date(today.getFullYear() - 1, 0, 1));
@@ -101,12 +125,12 @@ const IncomePage = () => {
         return expenseDate >= start && expenseDate <= end;
       });
       break;
-
+  
     default:
-      filteredItems = queriedData;
+      filteredItems = sortedData;
       break;
   }
-
+  
   const itemsPerPage = 15;
 
   // Calculate total pages
@@ -161,10 +185,10 @@ const IncomePage = () => {
         <Button color=" #003366" onClick={toggleAdd} aria-label="Add income">
           Add new
         </Button>
-        <FilterBox filter={filter} setFilter={setFilter} />
+        <FilterBox filter={filter} setFilter={setFilter} sort={sort} setSort={setSort} />
         <SearchData searchData={searchData} setSearchData={setSearchData} />
         <p className="total-amount">
-          Total income: <span>${totalIncome}</span>
+          Total income: <span>${formatNumberWithCommas(totalIncome)}</span>
         </p>
       </div>
       {showAdd && (
@@ -192,8 +216,8 @@ const IncomePage = () => {
             {data.length > 0 ? (
               currentItems.map((income, i) => (
                 <tr key={i}>
-                  <td>{income.Date}</td>
-                  <td>{income.Amount}</td>
+                  <td>{formatDateForDisplay(income.Date)}</td>
+                  <td>{formatNumberWithCommas(income.Amount)}</td>
                   <td className="description">{income.Reason}</td>
                   <td className="actions">
                     <Link to={`edit/${income.ID}`}>
