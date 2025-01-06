@@ -233,16 +233,18 @@ const ExpensesPage = () => {
                   <td className="actions">
                     <Link to={`edit/${expense.ID}`}>
                       <img
+                        src={`${import.meta.env.BASE_URL}edit.png`}
+                        alt="Edit Icon"
                         onClick={toggleEdit}
                         color="#5F9EA0"
-                        src="/edit.png"
                         className="icon"
                       />
                     </Link>
                     <img
                       onClick={() => toggleConfirmModal(expense)}
-                      src="/delete.png"
                       className="icon"
+                      alt="Delete Icon"
+                      src={`${import.meta.env.BASE_URL}delete.png`}
                     />
                   </td>
                 </tr>

@@ -43,19 +43,21 @@ const IncomePage = () => {
   let queriedData = data.filter((incomeData) =>
     incomeData.Reason.toLowerCase().includes(searchData.toLowerCase())
   );
-  
+
   // Convert a date string (MM/dd/yyyy) to a Date object
   const parseDate = (dateString) => {
     const [month, day, year] = dateString.split("/");
     return new Date(year, month - 1, day); // Month is 0-indexed
   };
-  
+
   // Helper functions for filtering
-  const startOfMonth = (date) => new Date(date.getFullYear(), date.getMonth(), 1);
-  const endOfMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  const startOfMonth = (date) =>
+    new Date(date.getFullYear(), date.getMonth(), 1);
+  const endOfMonth = (date) =>
+    new Date(date.getFullYear(), date.getMonth() + 1, 0);
   const startOfYear = (date) => new Date(date.getFullYear(), 0, 1);
   const endOfYear = (date) => new Date(date.getFullYear(), 11, 31);
-  
+
   // Sorting
   let sortedData;
   switch (sort) {
@@ -66,7 +68,7 @@ const IncomePage = () => {
         return dateB - dateA; // Compare Date objects
       });
       break;
-  
+
     case "descending":
       sortedData = [...queriedData].sort((a, b) => {
         const dateA = parseDate(a.Date);
@@ -74,18 +76,18 @@ const IncomePage = () => {
         return dateA - dateB; // Compare Date objects
       });
       break;
-  
+
     default:
       sortedData = [...queriedData];
       break;
   }
-  
+
   let filteredItems;
   switch (filter) {
     case "all":
       filteredItems = sortedData;
       break;
-  
+
     case "thisMonth":
       filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
@@ -95,17 +97,21 @@ const IncomePage = () => {
         return expenseDate >= start && expenseDate <= end;
       });
       break;
-  
+
     case "lastMonth":
       filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
         const today = new Date();
-        const start = startOfMonth(new Date(today.getFullYear(), today.getMonth() - 1, 1));
-        const end = endOfMonth(new Date(today.getFullYear(), today.getMonth() - 1, 1));
+        const start = startOfMonth(
+          new Date(today.getFullYear(), today.getMonth() - 1, 1)
+        );
+        const end = endOfMonth(
+          new Date(today.getFullYear(), today.getMonth() - 1, 1)
+        );
         return expenseDate >= start && expenseDate <= end;
       });
       break;
-  
+
     case "thisYear":
       filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
@@ -115,7 +121,7 @@ const IncomePage = () => {
         return expenseDate >= start && expenseDate <= end;
       });
       break;
-  
+
     case "lastYear":
       filteredItems = sortedData.filter((expense) => {
         const expenseDate = parseDate(expense.Date);
@@ -125,12 +131,12 @@ const IncomePage = () => {
         return expenseDate >= start && expenseDate <= end;
       });
       break;
-  
+
     default:
       filteredItems = sortedData;
       break;
   }
-  
+
   const itemsPerPage = 15;
 
   // Calculate total pages
@@ -185,7 +191,12 @@ const IncomePage = () => {
         <Button color=" #003366" onClick={toggleAdd} aria-label="Add income">
           Add new
         </Button>
-        <FilterBox filter={filter} setFilter={setFilter} sort={sort} setSort={setSort} />
+        <FilterBox
+          filter={filter}
+          setFilter={setFilter}
+          sort={sort}
+          setSort={setSort}
+        />
         <SearchData searchData={searchData} setSearchData={setSearchData} />
         <p className="total-amount">
           Total income: <span>${formatNumberWithCommas(totalIncome)}</span>
@@ -224,13 +235,15 @@ const IncomePage = () => {
                       <img
                         onClick={toggleEdit}
                         color="#5F9EA0"
-                        src="/edit.png"
+                        src={`${import.meta.env.BASE_URL}edit.png`}
+                        alt="Edit Icon"
                         className="icon"
                       />
                     </Link>
                     <img
                       onClick={() => toggleConfirmModal(income)}
-                      src="/delete.png"
+                      alt="Delete Icon"
+                      src={`${import.meta.env.BASE_URL}delete.png`}
                       className="icon"
                     />
                   </td>

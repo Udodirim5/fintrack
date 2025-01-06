@@ -22,7 +22,7 @@ const HomeComponent = () => {
         </div>
         </div>
         <div className={styles.heroImg}>
-          <img src="/hero-img.png" alt="Finance Icons" />
+        <img src={`${import.meta.env.BASE_URL}hero-img.png`} alt="Finance Icons" />
         </div>
       </section>
 
@@ -30,17 +30,17 @@ const HomeComponent = () => {
         <h2>Why Choose FinTrack?</h2>
         <div className={styles.featuresGrid}>
           <div>
-            <img src="/cash-flow.svg" alt="Wallet Icon" />
+            <img src={`${import.meta.env.BASE_URL}cash-flow.svg`} alt="Wallet Icon" />
             <h3>Expense Tracking</h3>
             <p>Monitor your spending and identify savings opportunities.</p>
           </div>
           <div>
-            <img src="/bar-chart.svg" alt="Chart Icon" />
+            <img src={`${import.meta.env.BASE_URL}bar-chart.svg`} alt="Chart Icon" />
             <h3>Income Insights</h3>
             <p>Gain valuable insights into your income sources.</p>
           </div>
           <div>
-            <img src="/security.svg" alt="Lock Icon" />
+            <img src={`${import.meta.env.BASE_URL}security.svg`} alt="Lock Icon" />
             <h3>Security</h3>
             <p>Your data is securely encrypted and protected.</p>
           </div>
