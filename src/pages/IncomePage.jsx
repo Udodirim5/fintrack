@@ -3,6 +3,7 @@ import { useIncome } from "../hooks/useIncome";
 import {
   formatNumberWithCommas,
   formatDateForDisplay,
+  truncate,
 } from "../hooks/formatData";
 
 import AddData from "../components/AddData";
@@ -213,50 +214,53 @@ const IncomePage = () => {
       )}
       {showEdit && <Outlet />}
 
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Amount</th>
-            <th className="description">Description</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <div className="table-body-wrapper">
-          <tbody>
-            {data.length > 0 ? (
-              currentItems.map((income, i) => (
-                <tr key={i}>
-                  <td>{formatDateForDisplay(income.Date)}</td>
-                  <td>{formatNumberWithCommas(income.Amount)}</td>
-                  <td className="description">{income.Reason}</td>
-                  <td className="actions">
-                    <Link to={`edit/${income.ID}`}>
-                      <img
-                        onClick={toggleEdit}
-                        color="#5F9EA0"
-                        src={`${import.meta.env.BASE_URL}edit.png`}
-                        alt="Edit Icon"
-                        className="icon"
-                      />
-                    </Link>
-                    <img
-                      onClick={() => toggleConfirmModal(income)}
-                      alt="Delete Icon"
-                      src={`${import.meta.env.BASE_URL}delete.png`}
-                      className="icon"
-                    />
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="4">No income found.</td>
-              </tr>
-            )}
-          </tbody>
+      <div className="table">
+        <div className="row table-head">
+          <div className="cell">Date</div>
+          <div className="cell">Amount</div>
+          <div className="cell">Description</div>
+          <div className="cell">Action</div>
         </div>
-      </table>
+
+        {data.length > 0 ? (
+          currentItems.map((income) => (
+            <div className="row row-data" key={income.ID}>
+              <div className="cell">{formatDateForDisplay(income.Date)}</div>
+              <div className="cell">
+                {formatNumberWithCommas(income.Amount)}
+              </div>
+              <div className="cell">
+                {truncate(income.Reason, 15)}{" "}
+                {income.Reason.length > 15 && (
+                  <Link to={`details/${income.ID}`}>open</Link>
+                )}
+              </div>
+              <div className="cell actions">
+                <Link to={`edit/${income.ID}`}>
+                  <img
+                    onClick={toggleEdit}
+                    color="#5F9EA0"
+                    src={`${import.meta.env.BASE_URL}edit.png`}
+                    alt="Edit Icon"
+                    className="icon"
+                  />
+                </Link>
+                <img
+                  onClick={() => toggleConfirmModal(income)}
+                  alt="Delete Icon"
+                  src={`${import.meta.env.BASE_URL}delete.png`}
+                  className="icon"
+                />{" "}
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="row">
+            <div className="cell">No income found.</div>
+          </div>
+        )}
+      </div>
+
       {totalPages > itemsPerPage && (
         <Pagination
           currentPage={currentPage}

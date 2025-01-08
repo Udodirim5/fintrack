@@ -4,6 +4,7 @@ import { useExpenses } from "../hooks/useExpenses";
 import {
   formatNumberWithCommas,
   formatDateForDisplay,
+  truncate
 } from "../hooks/formatData";
 
 import AddData from "../components/AddData";
@@ -213,50 +214,53 @@ const ExpensesPage = () => {
       )}
       {showEdit && <Outlet />}
 
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Amount</th>
-            <th className="description">Description</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <div className="table-body-wrapper">
-          <tbody>
-            {expenses.length > 0 ? (
-              currentItems.map((expense, i) => (
-                <tr key={i}>
-                  <td>{formatDateForDisplay(expense.Date)}</td>
-                  <td>{formatNumberWithCommas(expense.Amount)}</td>
-                  <td className="description">{expense.Reason}</td>
-                  <td className="actions">
-                    <Link to={`edit/${expense.ID}`}>
-                      <img
-                        src={`${import.meta.env.BASE_URL}edit.png`}
-                        alt="Edit Icon"
-                        onClick={toggleEdit}
-                        color="#5F9EA0"
-                        className="icon"
-                      />
-                    </Link>
-                    <img
-                      onClick={() => toggleConfirmModal(expense)}
-                      className="icon"
-                      alt="Delete Icon"
-                      src={`${import.meta.env.BASE_URL}delete.png`}
-                    />
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="4">No expenses found.</td>
-              </tr>
-            )}
-          </tbody>
+      <div className="table">
+        <div className="row table-head">
+          <div className="cell">Date</div>
+          <div className="cell">Amount</div>
+          <div className="cell">Description</div>
+          <div className="cell">Action</div>
         </div>
-      </table>
+
+        {expenses.length > 0 ? (
+          currentItems.map((expense) => (
+            <div className="row row-data" key={expense.ID}>
+              <div className="cell">{formatDateForDisplay(expense.Date)}</div>
+              <div className="cell">
+                {formatNumberWithCommas(expense.Amount)}
+              </div>
+              <div className="cell">
+                {truncate(expense.Reason, 15)}{" "}
+                {expense.Reason.length > 15 && (
+                  <Link to={`details/${expense.ID}`}>open</Link>
+                )}
+                </div>
+              <div className="cell actions">
+                <Link to={`edit/${expense.ID}`}>
+                  <img
+                    onClick={toggleEdit}
+                    color="#5F9EA0"
+                    src={`${import.meta.env.BASE_URL}edit.png`}
+                    alt="Edit Icon"
+                    className="icon"
+                  />
+                </Link>
+                <img
+                  onClick={() => toggleConfirmModal(expense)}
+                  alt="Delete Icon"
+                  src={`${import.meta.env.BASE_URL}delete.png`}
+                  className="icon"
+                />{" "}
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="row">
+            <div className="cell">No expense found.</div>
+          </div>
+        )}
+      </div>
+
       {totalPages > itemsPerPage && (
         <Pagination
           currentPage={currentPage}

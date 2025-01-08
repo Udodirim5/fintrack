@@ -21,3 +21,8 @@ export const formatDateForInput = (dateString) => {
   };
   return date.toLocaleDateString("en-US", options);
 }
+
+export function truncate(text, limit) {
+  return text.length > limit ? `${text.slice(0, limit)}...` : text;
+}
+

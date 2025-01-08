@@ -14,6 +14,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import EditIncomeSuperComponent from "./components/EditIncomeSuperComponent";
 import EditExpensesSuperComponent from "./components/EditExpensesSuperComponent";
 import AboutPage from "./pages/AboutPage";
+import {IncomeDetails, ExpensesDetails} from "./components/DataDetails";
 
 const App = () => {
   const isProduction = import.meta.env.PROD;
@@ -35,40 +36,14 @@ const App = () => {
                   {/* <Route path="contact" element={<AboutPage />} /> */}
 
                   {/* Expenses Routes */}
-                  <Route
-                    path="expenses"
-                    element={
-                      <ProtectedRoute>
-                        <ExpensesPage />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path="expenses/edit/:id"
-                    element={
-                      <ProtectedRoute>
-                        <EditExpensesSuperComponent />
-                      </ProtectedRoute>
-                    }
-                  />
+                  <Route path="expenses" element={ <ProtectedRoute> <ExpensesPage /> </ProtectedRoute> } />
+                  <Route path="expenses/edit/:id" element={ <ProtectedRoute> <EditExpensesSuperComponent /> </ProtectedRoute> } />
+                  <Route path="expenses/details/:id" element={ <ProtectedRoute> <ExpensesDetails /> </ProtectedRoute> } />
 
                   {/* Income Routes */}
-                  <Route
-                    path="incomes"
-                    element={
-                      <ProtectedRoute>
-                        <IncomePage />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path="incomes/edit/:id"
-                    element={
-                      <ProtectedRoute>
-                        <EditIncomeSuperComponent />
-                      </ProtectedRoute>
-                    }
-                  />
+                  <Route path="incomes" element={ <ProtectedRoute> <IncomePage /> </ProtectedRoute> } />
+                  <Route path="incomes/edit/:id" element={ <ProtectedRoute> <EditIncomeSuperComponent /> </ProtectedRoute> } />
+                  <Route path="incomes/details/:id" element={ <ProtectedRoute> <IncomeDetails /> </ProtectedRoute> } />
 
                   <Route path="*" element={<ErrorPage />} />
                 </Routes>

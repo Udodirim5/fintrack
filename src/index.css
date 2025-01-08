@@ -68,72 +68,59 @@ main {
   font-weight: 600;
 }
 
-table {
+
+
+
+.table {
+  display: table;
   border-collapse: collapse;
   width: 100%;
-  margin-top: 10px;
+  border: 2px solid var(--color);
 }
 
-thead {
-  background-color: #f0f0f0;
-}
-
-table th,
-table td {
+.row {
+  display: table-row;
   border: 1px solid var(--color);
-  padding: 0.5rem;
 }
 
-table th {
+.row:nth-child(even) {
+  background-color: #33333311;
+}
+
+.row-data:hover {
+  background-color: #4444441a;
+}
+
+.table-head {
   background-color: var(--primary-1);
-  width: max-content;
+  color: var(--color);
+  font-weight: 600;
 }
 
-table tbody {
-  display: block;
+.cell {
+  display: table-cell;
+  /* border: 1px solid var(--color); */
+  padding: 10px;
+  text-align: left;
 }
 
-table tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
+.cell a:active{
+  color: var(--color);
 }
 
-table .actions {
+.table .actions {
   display: flex;
   gap: 1rem;
 }
 
-table td {
-  border: 1px solid var(--color);
-  padding: 8px;
-}
 
-table td button {
-  all: unset;
-}
-
-table td .icon {
+.table .actions .icon {
   margin: 0;
   padding: 0;
   object-fit: cover;
   height: 30px;
 }
 
-table td button#deleteBtn {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.table-body-wrapper {
-  max-height: 350px;
-  overflow-y: scroll;
-  display: block;
-}
 
 .error-page {
   display: flex;
@@ -171,21 +158,13 @@ table td button#deleteBtn {
     gap: 1rem;
   }
 
-  table {
+  .table {
     font-size: 0.8rem;
+    overflow: auto;
   }
 
-  table th,
-  table td {
-    padding: 0.3rem;
-  }
-
-  table .actions {
+  .table .actions {
     gap: 5px;
-  }
-
-  table td button {
-    padding: 0.3rem;
   }
 
   .login form {
