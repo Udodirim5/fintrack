@@ -222,7 +222,7 @@ const IncomePage = () => {
           <div className="cell">Action</div>
         </div>
 
-        {data.length > 0 ? (
+        {filteredItems.length > 0 ? (
           currentItems.map((income) => (
             <div className="row row-data" key={income.ID}>
               <div className="cell">{formatDateForDisplay(income.Date)}</div>
@@ -256,12 +256,18 @@ const IncomePage = () => {
           ))
         ) : (
           <div className="row">
-            <div className="cell">No income found.</div>
+            <div className="cell">
+              {searchData
+                ? `No results found for "${searchData}".`
+                : filter !== "all"
+                ? "No data matches the selected filter."
+                : "No income records available."}
+            </div>
           </div>
         )}
       </div>
 
-      {totalPages > itemsPerPage && (
+      {filteredItems.length > itemsPerPage && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

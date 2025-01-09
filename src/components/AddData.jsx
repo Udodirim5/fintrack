@@ -25,6 +25,7 @@ const AddData = ({
             value={newData.Amount}
             onChange={handleChange}
             required
+            autoFocus
           />
         </div>
         <div>
@@ -48,10 +49,10 @@ const AddData = ({
           ></textarea>
         </div>
         <div className={styles.buttons}>
-          <Button type="submit" border="2px solid blue">
+          <Button type="submit" border="2px solid #003366" textColor="#003366">
             Submit
           </Button>
-          <Button onClick={handleClose} color="blue">
+          <Button onClick={handleClose} color="#003366" textColor="#ADD8E6">
             Close
           </Button>
         </div>

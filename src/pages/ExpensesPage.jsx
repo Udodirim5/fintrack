@@ -4,7 +4,7 @@ import { useExpenses } from "../hooks/useExpenses";
 import {
   formatNumberWithCommas,
   formatDateForDisplay,
-  truncate
+  truncate,
 } from "../hooks/formatData";
 
 import AddData from "../components/AddData";
@@ -222,7 +222,7 @@ const ExpensesPage = () => {
           <div className="cell">Action</div>
         </div>
 
-        {expenses.length > 0 ? (
+        {filteredItems.length > 0 ? (
           currentItems.map((expense) => (
             <div className="row row-data" key={expense.ID}>
               <div className="cell">{formatDateForDisplay(expense.Date)}</div>
@@ -234,7 +234,7 @@ const ExpensesPage = () => {
                 {expense.Reason.length > 15 && (
                   <Link to={`details/${expense.ID}`}>open</Link>
                 )}
-                </div>
+              </div>
               <div className="cell actions">
                 <Link to={`edit/${expense.ID}`}>
                   <img
@@ -256,12 +256,18 @@ const ExpensesPage = () => {
           ))
         ) : (
           <div className="row">
-            <div className="cell">No expense found.</div>
+            <div className="cell">
+              {searchData
+                ? `No results found for "${searchData}".`
+                : filter !== "all"
+                ? "No data matches the selected filter."
+                : "No expense records available."}
+            </div>
           </div>
         )}
       </div>
 
-      {totalPages > itemsPerPage && (
+      {filteredItems.length > itemsPerPage && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

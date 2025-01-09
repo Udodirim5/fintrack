@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import styles from "./Details.module.css";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
+import { formatNumberWithCommas } from "../hooks/formatData";
 
 const Details = ({ initialData, getSingleData }) => {
   const params = useParams();
@@ -32,14 +33,16 @@ const Details = ({ initialData, getSingleData }) => {
       <div className={styles.head}>
         <div className={styles.data}>
           <h3>Date: {currentData.Date}</h3>
-          <h3>Amount: {currentData.Amount}</h3>
+          <h3>Amount: {formatNumberWithCommas(currentData.Amount)}</h3>
         </div>
         <div className={styles.back}>
-          <Button onClick={() => navigate(-1)}>Back</Button>
+          <Button textColor="#003366" onClick={() => navigate(-1)}>
+            Back
+          </Button>
         </div>
       </div>
       <div className={styles.description}>
-        <h3>Description</h3>
+        <h3>Description:</h3>
         <p>{currentData.Reason}</p>
       </div>
     </div>

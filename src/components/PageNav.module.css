@@ -1,7 +1,5 @@
 .header {
   background-color: var(--primary);
-  color: var(--color);
-  padding: 1rem 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -18,19 +16,30 @@
   padding: 1rem;
 }
 
-.nav a {
-  /* border: 2px solid red; */
-  margin: 0;
-  padding: 0;
-  line-height: 0;
-}
-
 .nav ul {
   list-style: none;
   display: flex;
   align-items: center;
   gap: 2rem;
   transition: all 0.3s ease-in-out;
+}
+
+.nav ul li {
+  width: 100%;
+}
+
+.nav ul li a {
+  border: 2px solid var(--color);
+  border-radius: var(--border-radius);
+  color: var(--color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.5rem 1.7rem;
+}
+
+.nav ul li a:hover {
+  background: var(--color);
+  color: var(--primary);
 }
 
 .nav a:link,
@@ -41,21 +50,25 @@
   font-size: 1.2rem;
   font-weight: 600;
   padding: 0.5rem 1.7rem;
-  border-radius: 7px;
+  border-radius: var(--border-radius);
   color: var(--color);
 }
 
 /* Active Link Styling */
-.nav a:global(.active) {
+.nav :global(a.active) {
   border: 2px solid var(--color);
+  background: var(--color);
+  color: var(--primary);
 }
+
 
 a.ctaLink:link,
 a.ctaLink:active,
 a.ctaLink:visited {
   border: 2px solid var(--color);
   padding: 0.5rem 1.7rem;
-  border-radius: 7px;
+  border-radius: var(--border-radius);
+  color: var(--primary);
 }
 
 .burger-menu {
@@ -83,14 +96,15 @@ a.ctaLink:visited {
     flex-direction: column;
     background: var(--primary);
     width: 100%;
-    gap: 1.5rem;
+    gap: 2rem;
     position: absolute;
     top: 100%;
     right: 0;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 3rem 2rem;
     transition: all 0.3s ease-in-out;
     pointer-events: none;
     z-index: 9;
+    box-shadow: var(--shadow--2);
   }
 
   .nav ul.navLinksOpen {

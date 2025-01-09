@@ -5,6 +5,7 @@
   width: 100%;
   background: var(--primary);
   padding: 1rem;
+  padding-bottom: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,6 +25,7 @@
 }
 
 .AddDataForm label {
+  color: var(--color);
   display: block;
   margin-bottom: 5px;
 }
@@ -37,6 +39,7 @@
   outline: none;
   background: transparent;
   width: inherit;
+  height: 15rem;
   padding: 10px 2px;
   color: var(--color);
 }
