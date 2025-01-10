@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 const AboutPage = () => {
   return (
     <main>
-      <div className={styles.product}>
+      <div className={styles.about}>
         <h2>About FinTrack</h2>
         <section>
           <img

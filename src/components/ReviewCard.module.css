@@ -6,6 +6,7 @@
   overflow: hidden;
   border-radius: 8px;
   background-color: #fff;
+  min-height: fit-content;
 }
 
 .cardTop {
@@ -16,10 +17,43 @@
   border-bottom: 1px solid #ddd;
 }
 
+.cardTopLeft {
+  float: left;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 0 20px 0 10px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 2px solid var(--color);
+}
+
+.cardTopLeft img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
 .content {
   text-align: left;
   padding: 1rem;
   font-size: 0.9rem;
+}
+
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.toggleButton:hover {
+  color: var(--accent);
 }
 
 @media screen and (max-width: 600px) {

@@ -1,18 +1,20 @@
-.product {
+.about {
   padding: 2.5rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow--2);
   text-align: center;
+  border: 2px solid #333;
+  margin-bottom: 2rem;
 }
 
-.product section {
+.about section {
   text-align: left;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
 }
 
-.product img {
+.about img {
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -20,26 +22,26 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.product h2 {
+.about h2 {
   font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 3rem;
   color: var(--color);
 }
 
-.product p {
+.about p {
   line-height: 1.6;
   word-wrap: break-word;
   color: var(--color);
 }
 
 @media (max-width: 768px) {
-  .product section {
+  .about section {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
 
-  .product {
+  .about {
     padding: 2rem;
   }
 }

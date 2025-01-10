@@ -79,7 +79,7 @@
 
 .features {
   margin-top: 5rem;
-  border-radius: var(--border-radius);
+  padding: 1.25rem 0 5.5rem;
 }
 
 .featuresGrid {
@@ -87,11 +87,13 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin-top: 2.5rem;
-  padding: 2rem 1.25rem;
   text-align: center;
-  background-color: #f8f9fa;
+}
+.featuresGrid div {
+  box-shadow: 0 0 10px #00000067;
   border-radius: var(--border-radius);
-  box-shadow: 0 0 10px #0000001a;
+  padding: 2rem 1.25rem;
+  background-color: #f8f9fa;
 }
 
 .features img {
