@@ -15,6 +15,10 @@
   font-size: 16px;
   cursor: pointer;
 }
+.pagination button:not(:disabled):hover {
+  background: var(--color);
+  color: var(--primary);
+}
 
 .pagination button:disabled {
   cursor: not-allowed;

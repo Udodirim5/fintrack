@@ -3,7 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import styles from "./Details.module.css";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
-import { formatNumberWithCommas } from "../hooks/formatData";
+import {
+  formatNumberWithCommas,
+  formatDateForDisplay,
+} from "../hooks/formatData";
 
 const Details = ({ initialData, getSingleData }) => {
   const params = useParams();
@@ -32,11 +35,15 @@ const Details = ({ initialData, getSingleData }) => {
     <div className={styles.container}>
       <div className={styles.head}>
         <div className={styles.data}>
-          <h3>Date: {currentData.Date}</h3>
+          <h3>Date: {formatDateForDisplay(currentData.Date)}</h3>
           <h3>Amount: {formatNumberWithCommas(currentData.Amount)}</h3>
         </div>
         <div className={styles.back}>
-          <Button textColor="#003366" onClick={() => navigate(-1)}>
+          <Button
+            className={styles.backButton}
+            textColor="#003366"
+            onClick={() => navigate(-1)}
+          >
             Back
           </Button>
         </div>

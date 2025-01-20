@@ -94,11 +94,11 @@ const EditData = ({
           ></textarea>
         </div>
         <div className={styles.buttons}>
-          <Button type="submit" border="2px solid blue">
+          <Button textColor="#003366" type="submit" border="2px solid #003366">
             {type === "income" ? "Update Income" : "Update Expense"}
           </Button>
           <Link to={`/${type}s`}>
-            <Button color="blue">Close</Button>
+            <Button  color="#003366">Close</Button>
           </Link>
         </div>
       </form>

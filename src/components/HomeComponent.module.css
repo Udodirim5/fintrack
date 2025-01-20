@@ -89,6 +89,7 @@
   margin-top: 2.5rem;
   text-align: center;
 }
+
 .featuresGrid div {
   box-shadow: 0 0 10px #00000067;
   border-radius: var(--border-radius);
@@ -109,7 +110,7 @@
 .features h3 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #444;
+  color: #000;
 }
 
 .features p {
@@ -125,6 +126,7 @@
   font-size: 2rem;
   margin-bottom: 1.25rem;
 }
+
 .cta {
   background-color: var(--color);
   color: var(--primary);

@@ -1,5 +1,13 @@
 /* eslint-disable react/prop-types */
-const Button = ({ children, color, border, onClick, id = "", textColor }) => {
+const Button = ({
+  children,
+  color,
+  className,
+  border,
+  onClick,
+  id = "",
+  textColor,
+}) => {
   const ButtonStyle = {
     backgroundColor: color ? color : "transparent",
     color: textColor ? textColor : "white",
@@ -9,10 +17,11 @@ const Button = ({ children, color, border, onClick, id = "", textColor }) => {
     fontSize: "1rem",
     fontWeight: "bold",
     border: border ? border : `2px solid ${color}`,
+    transition: "all 0.3s ease-in-out",
   };
 
   return (
-    <button style={ButtonStyle} id={id} onClick={onClick}>
+    <button style={ButtonStyle} className={className} id={id} onClick={onClick}>
       {children}
     </button>
   );

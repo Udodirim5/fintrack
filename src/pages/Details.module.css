@@ -21,6 +21,10 @@
   align-items: center;
 }
 
+.backButton:hover {
+  transform: scale(1.2);
+}
+
 .description p {
   color: var(--color);
 }

@@ -189,7 +189,13 @@ const ExpensesPage = () => {
         />
       )}
       <div className="page-header">
-        <Button color=" #003366" onClick={toggleAdd} aria-label="Add expense">
+        <Button
+          border=" 2px solid #003366"
+          textColor="#ADD8E6"
+          color=" #003366"
+          onClick={toggleAdd}
+          aria-label="Add expense"
+        >
           Add new
         </Button>
         <FilterBox

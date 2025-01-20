@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import styles from "./LoginComponent.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import AlertMsg from "./AlertMsg";
 
 const LoginComponent = () => {
-  const [password, setPassword] = useState("qwerty");
-  const [username, setUsername] = useState("jack5");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { login, isAuthenticated } = useAuth();
+  const { login, error, isAuthenticated, dispatch } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -26,7 +27,18 @@ const LoginComponent = () => {
     }
   }, [isAuthenticated, navigate]);
 
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        dispatch({ type: "clearError" });
+      }, 5000);
+      return () => clearTimeout(timer); 
+    }
+  }, [error, dispatch]);
+
   return (
+    <>
+    {error && <AlertMsg error={error} />}
     <div className={styles.authContainer}>
       <div className={styles.formWrapper}>
         <h1>Welcome Back</h1>
@@ -70,6 +82,7 @@ const LoginComponent = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 
