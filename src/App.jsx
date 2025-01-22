@@ -14,6 +14,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import EditIncomeSuperComponent from "./components/EditIncomeSuperComponent";
 import EditExpensesSuperComponent from "./components/EditExpensesSuperComponent";
 import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 import {IncomeDetails, ExpensesDetails} from "./components/DataDetails";
 
 const App = () => {
@@ -33,7 +34,7 @@ const App = () => {
                   <Route path="login" element={<LoginPage />} />
                   <Route path="signup" element={<SignupPage />} />
                   <Route path="about" element={<AboutPage />} />
-                  {/* <Route path="contact" element={<AboutPage />} /> */}
+                  <Route path="contact" element={<ContactPage />} />
 
                   {/* Expenses Routes */}
                   <Route path="expenses" element={ <ProtectedRoute> <ExpensesPage /> </ProtectedRoute> } />
